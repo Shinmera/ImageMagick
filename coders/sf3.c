@@ -282,6 +282,7 @@ static Image *ReadSF3Image(const ImageInfo *image_info,ExceptionInfo *exception)
     ThrowReaderException(CorruptImageError,"NegativeOrZeroImageSize");
   channels=ReadBlobByte(image);
   format=ReadBlobByte(image);
+  p=(unsigned char *) NULL;
   quantum_info=(QuantumInfo *) NULL;
   
   for (unsigned int z=0; z<layers; ++z)
@@ -586,8 +587,8 @@ static MagickBooleanType WriteSF3Image(const ImageInfo *image_info,Image *image,
   number_scenes=GetImageListLength(image);
   quantum_type=GetQuantumType(image,exception);
   quantum_format=GetQuantumFormat(quantum_info);
-  width=image->columns;
-  height=image->rows;
+  width=(unsigned int)image->columns;
+  height=(unsigned int)image->rows;
   switch (quantum_type)
     {
     case GrayQuantum:
